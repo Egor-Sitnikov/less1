@@ -3,5 +3,6 @@ def palindrome(str):
         print('True')
     else:
         print('False')
+    print(str)
 
 palindrome('helloworld')
