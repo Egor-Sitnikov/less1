@@ -1,0 +1,43 @@
+h1 {
+    background: rgb(61, 124, 175)
+}
+
+.paragraf-1 {
+    background: blue;
+    font-size: 32pt;
+    color: green;
+}
+
+
+.paragraf-2 {
+    background: black;
+    font-size: 24pt;
+    color: white;
+    font-family: "Counrier New", Counrier, mano;
+}
+
+.paragraf-3 {
+    font-size: 24px;
+    text-align: center;
+    font-style: italic;
+    box-shadow: 1px 1px 10px 3px green;
+}
+
+div {
+    text-align: center;
+}
+
+/*
+.paragraf-1{
+    background: ;
+    font-size: ;
+    color: ;
+    border: ;
+    border-radius: ;
+    font-weight: ;
+    font-family: ;
+    margin: ;
+    padding: ;
+}
+*/
+
