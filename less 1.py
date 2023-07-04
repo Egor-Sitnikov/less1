@@ -24,3 +24,5 @@ strcounter('abccd')
 #   for sym in set(s):
 #       print(f'{sym} - {s.count(sym)}')
 
+lst = [1, 5, 10, 60, 1000, 7000, 7050]
+elem = 1050
