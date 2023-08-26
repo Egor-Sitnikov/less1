@@ -2,6 +2,9 @@ import re
 from django import forms
 from .models import Advertisements
 from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -21,6 +24,8 @@ class AdvertisementForm(ModelForm):
         if title and re.match(r'^\?', title):
             raise forms.ValidationError('Заголовок не должен начинаться с вопросительного знака')
         return title
+
+
 
 
 # class AdvertisementForm(forms.Form):

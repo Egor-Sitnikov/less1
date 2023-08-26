@@ -8,12 +8,12 @@
 
 <ul class="nav nav-pills sticky-top bg-white nav-fill">
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="{% url 'main-page' %}">
+    <a class="nav-link" href="{% url 'main-page' %}">
       <span style="font-weight: bold;">Главная</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="top-sellers"><span style="font-weight: bold;">Топ продавцов</span>
+    <a class="nav-link" href="{% url 'top-sellers' %}"><span style="font-weight: bold;">Топ продавцов</span>
     </a>
   </li>
   <li class="nav-item">
@@ -21,8 +21,9 @@
       <span style="font-weight: bold;">Разместить объявление</span>
     </a>
   </li>
+  {% if not user.is_authenticated %}
   <li class="nav-item">
-    <a class="nav-link" href="register.html">
+    <a class="nav-link" href="{% url 'register' %}">
       <span style="font-weight: bold;">Регистрация</span>
     </a>
   </li>
@@ -31,6 +32,7 @@
       <span style="font-weight: bold;">Войти</span>
     </a>
   </li>
+  {% else %}
   <li class="nav-item">
     <a class="nav-link" href="{% url 'profile' %}">
       <span style="font-weight: bold;">Профиль</span>
@@ -41,12 +43,15 @@
       <span style="font-weight: bold;">Выйти</span>
     </a>
   </li>
+  {% endif %}
 </ul>
+
   <div class="container">
-  <div class="row">
-    <div class="col-8" style="margin: 50px;">
-      <div class="display-2">
-        <span class="badge bg-primary">Страница авторизации пользователя</span>
+    <div class="row">
+      <div class="col-8" style="margin: 50px;">
+        <div class="display-2">
+          <span class="badge bg-primary">Страница авторизации пользователя</span>
+        </div>
       </div>
     </div>
   </div>
@@ -55,6 +60,7 @@
       <div class="col-sm-4 offset-4 w-25">
         <div class="form-label bg-warning" style="margin: 10px">
           {{ error }}
+        </div>
       </div>
     </div>
       {% endif %}
@@ -83,6 +89,6 @@
       </div>
     </form>
   </div>
-{% endblock %}
 </body>
+{% endblock %}
 </html>

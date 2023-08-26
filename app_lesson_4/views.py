@@ -4,9 +4,9 @@ from .models import Advertisements
 from .forms import AdvertisementForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from django.http import HttpResponse
 
-# Create your views here.
+
+
 def index(request):
     advertisements = Advertisements.objects.all()
     context = {'advertisements': advertisements}
@@ -29,3 +29,19 @@ def advertisements_post(request):
         form = AdvertisementForm()
     context = {'form': form}
     return render(request, 'app_advertisements/advertisement-post.html', context)
+
+
+
+# def sign_up(request):
+#     if request.method == 'GET':
+#         form = RegisterForm()
+#         return render(request, 'users/register.html', {'form': form})
+
+
+# class RegisterView(FormView):
+#     form_class = RegisterForm
+#     template_name = 'app_auth/register.html'
+#     success_url = reverse_lazy('app_lesson_4/index.html')
+#     def form_valid(self, form):
+#         form.save()
+#         return super().form_valid(form)
