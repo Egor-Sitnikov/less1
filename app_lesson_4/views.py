@@ -1,19 +1,26 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Advertisements
 from .forms import AdvertisementForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from .models import Advertisements, User
+from django.db.models import Count
 
 
 
 def index(request):
-    advertisements = Advertisements.objects.all()
-    context = {'advertisements': advertisements}
+    title = request.GET.get('query')
+    if title:
+        advertisements = Advertisements.objects.filter(title__icontains=title)
+    else:
+        advertisements = Advertisements.objects.all()
+    context = {'advertisements': advertisements, 'title': title}
     return render(request, "app_advertisements/index.html", context)
 
 def top_sellers(request):
-    return render(request, "app_advertisements/top-sellers.html")
+    users = User.objects.annotate(adv_count=Count('advertisements')).order_by('-adv_count')
+    context = {'users': users}
+    return render(request, "app_advertisements/top-sellers.html", context)
 
 @login_required(login_url=reverse_lazy('login'))
 def advertisements_post(request):
@@ -30,18 +37,9 @@ def advertisements_post(request):
     context = {'form': form}
     return render(request, 'app_advertisements/advertisement-post.html', context)
 
+def advertisement_detail(request, pk):
+    advertisement = Advertisements.objects.get(id=pk)
+    context = {'adv': advertisement}
+    return render(request, 'app_advertisements/advertisement.html', context)
 
 
-# def sign_up(request):
-#     if request.method == 'GET':
-#         form = RegisterForm()
-#         return render(request, 'users/register.html', {'form': form})
-
-
-# class RegisterView(FormView):
-#     form_class = RegisterForm
-#     template_name = 'app_auth/register.html'
-#     success_url = reverse_lazy('app_lesson_4/index.html')
-#     def form_valid(self, form):
-#         form.save()
-#         return super().form_valid(form)

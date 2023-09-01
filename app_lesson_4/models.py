@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib import admin
 from django.utils import timezone
 from django.utils.html import format_html
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -40,12 +41,16 @@ class Advertisements(models.Model):
             )
         return self.updated_at.strftime('%d.%m.%Y в %H:%M:%S')
 
+
     @admin.display(description='Изображение')
     def created_image(self):
         if self.image:
             return format_html(
                 '<img src="{}" style="max-height: 50px;">', self.image.url
         )
+
+    def get_absolute_url(self):
+        return reverse('adv-detail', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'advertisements'

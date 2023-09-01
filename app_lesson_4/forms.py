@@ -26,8 +26,6 @@ class AdvertisementForm(ModelForm):
         return title
 
 
-
-
 # class AdvertisementForm(forms.Form):
 #     title = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
 #     description = forms.CharField(

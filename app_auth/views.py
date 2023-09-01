@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
+from .forms import MyUserCreationForm
 
 
 def profile_view(request):
@@ -10,7 +9,7 @@ def profile_view(request):
 
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = MyUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
@@ -20,7 +19,7 @@ def register_view(request):
             redirect_url = reverse('profile')
             return redirect(redirect_url)
     else:
-        form = UserCreationForm()
+        form = MyUserCreationForm()
     return render(request, 'app_auth/register.html', {'form': form})
 
 def login_view(request):
